@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+print("Hello World")
 root = tk.Tk()
 root.title("Gradebook +")
 root.columnconfigure(0, weight=1)#Only one column is set, but ensures that form stays centred when expanding
