@@ -1,0 +1,11 @@
+import sqlite3
+conn=sqlite3.connect("customer.db")
+c = conn.cursor()
+c.execute("""SELECT * FROM customers""")
+print(c.fetchone()[0])
+#c.fetchmany()
+print(c.fetchall())
+c.execute("""SELECT rowid, * FROM customers""")
+print(c.fetchall())
+conn.commit()
+conn.close()
