@@ -14,7 +14,7 @@ for line in f:
         password = p[1]
         print(password)
 server = smtplib.SMTP_SSL("smtp.mail.yahoo.com", 465)
-print("hello")
+print("helloo")
 server.ehlo()
 
 
