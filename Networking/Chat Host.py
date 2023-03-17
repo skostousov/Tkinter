@@ -14,9 +14,10 @@ clients = []
 nicknames = []
 
 #Send message to all connected clients
-def broadcast(message):
+def broadcast(message, clientele):
     for client in clients:
-        client.send(message)
+        if not clientele:
+            client.send(message)
         
 #Handle messages from clients
 def handle(client):
@@ -24,7 +25,7 @@ def handle(client):
         try:
             #Broadcasting Messages
             message = client.recv(1024)
-            broadcast(message)
+            broadcast(message, client)
         except:
             #Removing and closing clients
             index = clients.index(client)
