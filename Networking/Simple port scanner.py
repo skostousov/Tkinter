@@ -7,7 +7,10 @@ target = "10.26.202.76"
 #target = "10.26.202.225"
 queue = Queue()
 open_ports = []
+for port in range(1, 1024):
+    queue.put(port)
 
+#Checks if port is open
 def portscan(port):
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -15,19 +18,15 @@ def portscan(port):
         return True
     except:
         return False
-    
-for port in range(1, 1024):
-            queue.put(port)
-            
+
+#Fetches port from queue and if portscan(port) is true, adds to operational ports            
 def worker():
     while not queue.empty():
         port = queue.get()
         if portscan(port):
-            print("Port {} is open!".format(port))
             open_ports.append(port)
-        else:
-            print("Port {} is closed!".format(port))
-            
+
+#Creates threads that each run the worker function            
 def run_scanner(threads):
     thread_list = []
     for t in range(threads):
@@ -37,7 +36,7 @@ def run_scanner(threads):
     for thread in thread_list:
         thread.start()
     for thread in thread_list:
-        thread.join()
+        thread.join()#Wait till the thread terminates
         
     print("Open ports are:", open_ports)
     
