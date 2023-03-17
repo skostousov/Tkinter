@@ -3,6 +3,7 @@ import socket
 import threading
 
 target = "127.0.0.1"
+#target = "10.26.202.225"
 queue = Queue
 open_ports = []
 
@@ -37,7 +38,7 @@ def worker():
         port = queue.get()
         if portscan(port):
             print("Port {} is open!".format(port))
-            open_ports.append(port)
+            open_ports.put(port)
         else:
             print("Port {} is closed!".format(port))
             
@@ -46,13 +47,14 @@ def run_scanner(threads, mode):
     thread_list = []
     for t in range(threads):
         thread = threading.Thread(target=worker)
-        thread_list.append(thread)
+        thread_list.put(thread)
         
     for thread in thread_list:
         thread.start()
     for thread in thread_list:
         thread.join()
         
-    print("Oprn ports are:", open_ports)
+    print("Open ports are:", open_ports)
     
-    run_scanner(100, 1)
+
+run_scanner(2, 1)
