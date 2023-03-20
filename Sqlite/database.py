@@ -6,7 +6,6 @@ conn = sqlite3.connect("customer.db")
 
 #Create cursor
 c = conn.cursor()
-
 #Create table
 c.execute("""CREATE TABLE IF NOT EXISTS customers (
     first_name text,

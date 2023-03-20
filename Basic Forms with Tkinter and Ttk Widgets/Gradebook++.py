@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 root = tk.Tk()
+print("helloworld")
 
 class InputLabel(tk.Frame):
     def __init__(self, parent, label, inp_cls, inp_args, *args, **kwargs):
